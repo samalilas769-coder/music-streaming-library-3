@@ -10,9 +10,22 @@ public class playlist {
         this.song2 = song2;
     }
 
-    public void showPlaylist() {
-        System.out.println("Playlist: " + name);
-        System.out.println(song1);
-        System.out.println(song2);
+    public int getTotalDuration() {
+        return song1.getDuration() + song2.getDuration();
+    }
+
+    private String formatTime(int seconds) {
+        int min = seconds / 60;
+        int sec = seconds % 60;
+        return min + " min " + sec + " sec";
+    }
+
+    // ✅ Override Object.toString()
+    @Override
+    public String toString() {
+        return "Playlist name: " + name + "\n" +
+                song1 + "\n" +
+                song2 + "\n" +
+                "Total duration: " + formatTime(getTotalDuration());
     }
 }
