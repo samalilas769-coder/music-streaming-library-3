@@ -1,29 +1,18 @@
-import java.util.ArrayList;
-
 public class playlist {
-    private final String name;
-    private final ArrayList<song> songs = new ArrayList<>();
 
-    public playlist(String name) {
+    private String name;
+    private song song1;
+    private song song2;
+
+    public playlist(String name, song song1, song song2) {
         this.name = name;
+        this.song1 = song1;
+        this.song2 = song2;
     }
 
-    public void addSong(song s) {
-        songs.add(s);
-    }
-
-    public int getTotalDuration() {
-        int total = 0;
-        for (song s : songs) {
-            total += s.duration(); // ✅ record‑тағы дұрыс әдіс
-        }
-        return total;
-    }
-
-    @Override
-    public String toString() {
-        return "Playlist{name='" + name + "', songs=" + songs +
-                ", totalDuration=" + getTotalDuration() + "}";
+    public void showPlaylist() {
+        System.out.println("Playlist: " + name);
+        System.out.println(song1);
+        System.out.println(song2);
     }
 }
-
