@@ -1,14 +1,20 @@
-public class artist {
+package com.a81.music;
 
+import java.util.Objects;
+
+public class artist {
     private String name;
     private String genre;
     private int debutYear;
+
+    public artist() {}
 
     public artist(String name, String genre, int debutYear) {
         this.name = name;
         this.genre = genre;
         this.debutYear = debutYear;
     }
+
 
     public String getName() {
         return name;
@@ -22,25 +28,20 @@ public class artist {
         return debutYear;
     }
 
-    public int getExperience(int currentYear) {
-        return currentYear - debutYear;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void showInfo() {
-        System.out.println("Artist name : " + name);
-        System.out.println("Genre       : " + genre);
-        System.out.println("Debut year  : " + debutYear);
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
-    // ✅ Override Object.toString()
-    @Override
-    public String toString() {
-        return "Artist: " + name +
-                " | Genre: " + genre +
-                " | Experience: " + getExperience(2025) + " years";
+    public void setDebutYear(int debutYear) {
+        this.debutYear = debutYear;
     }
 
-    // ✅ Override Object.equals()
+    // ✅ equals
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -48,13 +49,19 @@ public class artist {
 
         artist other = (artist) obj;
         return debutYear == other.debutYear &&
-                name.equals(other.name) &&
-                genre.equals(other.genre);
+                Objects.equals(name, other.name) &&
+                Objects.equals(genre, other.genre);
     }
 
-    // ✅ Override Object.hashCode()
+    // ✅ hashCode
     @Override
     public int hashCode() {
-        return name.hashCode() + genre.hashCode() + debutYear;
+        return Objects.hash(name, genre, debutYear);
+    }
+
+    // ✅ toString
+    @Override
+    public String toString() {
+        return "artist{name='" + name + "', genre='" + genre + "', debutYear=" + debutYear + "}";
     }
 }

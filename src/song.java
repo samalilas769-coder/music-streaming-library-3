@@ -1,12 +1,13 @@
 public class song {
 
     private String title;
-    private int duration;
+    private int duration; // seconds
 
     public song(String title, int duration) {
         this.title = title;
         this.duration = duration;
     }
+
 
     public String getTitle() {
         return title;
@@ -14,6 +15,15 @@ public class song {
 
     public int getDuration() {
         return duration;
+    }
+
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     private String formatTime() {
@@ -26,14 +36,11 @@ public class song {
         System.out.println("▶ Playing: " + title + " (" + formatTime() + ")");
     }
 
-    // ✅ Override Object.toString()
     @Override
     public String toString() {
-        return "Song title: " + title +
-                " | Duration: " + formatTime();
+        return "Song{title='" + title + "', duration=" + formatTime() + "}";
     }
 
-    // ✅ Override Object.equals()
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -44,7 +51,6 @@ public class song {
                 title.equals(other.title);
     }
 
-    // ✅ Override Object.hashCode()
     @Override
     public int hashCode() {
         return title.hashCode() + duration;

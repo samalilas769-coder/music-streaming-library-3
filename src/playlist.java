@@ -10,6 +10,32 @@ public class playlist {
         this.song2 = song2;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public song getSong1() {
+        return song1;
+    }
+
+    public song getSong2() {
+        return song2;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSong1(song song1) {
+        this.song1 = song1;
+    }
+
+    public void setSong2(song song2) {
+        this.song2 = song2;
+    }
+
     public int getTotalDuration() {
         return song1.getDuration() + song2.getDuration();
     }
@@ -20,10 +46,9 @@ public class playlist {
         return min + " min " + sec + " sec";
     }
 
-    // ✅ Override Object.toString()
     @Override
     public String toString() {
-        return "Playlist name: " + name + "\n" +
+        return "Playlist: " + name + "\n" +
                 song1 + "\n" +
                 song2 + "\n" +
                 "Total duration: " + formatTime(getTotalDuration());

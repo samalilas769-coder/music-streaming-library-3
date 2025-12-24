@@ -20,4 +20,3 @@ public class Main {
         s2.play();
     }
 }
-
