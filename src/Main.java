@@ -1,22 +1,26 @@
 public class Main {
-
     public static void main(String[] args) {
 
-        song s1 = new song("Shape of You", 240);
-        song s2 = new song("Perfect", 263);
-        song s3 = new song("Shape of You", 240);
+        // POLYMORPHISM
+        Artist artist = new Singer("Adele");
 
-        playlist p = new playlist("My Favorites", s1, s2);
+        Song s1 = new Song("Hello", 295, artist);
+        Song s2 = new Song("Easy On Me", 224, artist);
 
-        System.out.println("=== PLAYLIST INFO ===");
-        System.out.println(p); // toString override
+        Playlist playlist = new Playlist("My Playlist");
+        playlist.addSong(s1);
+        playlist.addSong(s2);
 
-        System.out.println("\n=== SONG COMPARISON ===");
-        System.out.println("s1 equals s2: " + s1.equals(s2));
-        System.out.println("s1 equals s3: " + s1.equals(s3));
+        // SORT
+        playlist.sortByDuration();
+        playlist.printSongs();
 
-        System.out.println("\n=== PLAYING ===");
-        s1.play();
-        s2.play();
+        // SEARCH
+        System.out.println("Found: " + playlist.searchByTitle("Hello"));
+
+        // FILTER
+        for (Song s : playlist.filterByArtist("Adele")) {
+            System.out.println("Filtered: " + s);
+        }
     }
 }
