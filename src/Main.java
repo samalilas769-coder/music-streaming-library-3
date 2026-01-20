@@ -1,26 +1,41 @@
+import java.sql.*;
+
 public class Main {
     public static void main(String[] args) {
+        // Database credentials
+        String url = "jdbc:postgresql://localhost:5432/assignment3_db";
+        String user = "postgres";
+        String password = "samal2007";
 
-        // POLYMORPHISM
-        Artist artist = new Singer("Adele");
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            System.out.println("Connection to PostgreSQL established successfully!");
+            Statement statement = connection.createStatement();
 
-        Song s1 = new Song("Hello", 295, artist);
-        Song s2 = new Song("Easy On Me", 224, artist);
+            // 1. CREATE (Write) - Adding a new artist
+            String insertArtist = "INSERT INTO artists (name, genre) VALUES ('Taylor Swift', 'Pop')";
+            statement.executeUpdate(insertArtist);
+            System.out.println("Data inserted successfully!");
 
-        Playlist playlist = new Playlist("My Playlist");
-        playlist.addSong(s1);
-        playlist.addSong(s2);
+            // 2. READ - Fetching data from the database
+            System.out.println("List of Artists in Database:");
+            ResultSet rs = statement.executeQuery("SELECT * FROM artists");
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id") + " | Name: " + rs.getString("name") + " | Genre: " + rs.getString("genre"));
+            }
 
-        // SORT
-        playlist.sortByDuration();
-        playlist.printSongs();
+            // 3. UPDATE - Changing existing data
+            String updateSql = "UPDATE artists SET genre = 'Country' WHERE name = 'Taylor Swift'";
+            statement.executeUpdate(updateSql);
+            System.out.println("Data updated successfully!");
 
-        // SEARCH
-        System.out.println("Found: " + playlist.searchByTitle("Hello"));
+            // 4. DELETE - Removing data
+            // To delete, uncomment the line below:
+            // statement.executeUpdate("DELETE FROM artists WHERE name = 'Taylor Swift'");
+            // System.out.println("Data deleted successfully!");
 
-        // FILTER
-        for (Song s : playlist.filterByArtist("Adele")) {
-            System.out.println("Filtered: " + s);
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
